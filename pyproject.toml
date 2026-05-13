@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "filebeam"
+version = "0.1.0"
+description = "CLI tool to beam files up to storage providers (GitHub Gist, S3, …)"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+
+[project.scripts]
+filebeam = "filebeam.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["filebeam*"]
