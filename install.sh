@@ -56,6 +56,7 @@ fi
 
 # ── Done ──────────────────────────────────────────────────────────────────────
 
+sleep 5
 printf "\n"
 printf "  ${GREEN}${BOLD}All done!${RESET}\n"
 printf "\n"
