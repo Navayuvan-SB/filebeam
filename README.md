@@ -1,4 +1,4 @@
-# filebeam
+<h1 align="center">filebeam</h1>
 
 <p align="center">
   <b>Beam files up to storage providers from your terminal. Point it at a file, get a URL back.</b>
