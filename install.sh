@@ -40,7 +40,7 @@ configure_token() {
   echo ""
 
   # stty -echo disables terminal echo so the token isn't visible as it's typed
-  printf "  Paste your token (input hidden): "
+  printf "  Paste your token (hidden) or press Enter to skip: "
   stty -echo 2>/dev/null || true
   read -r GITHUB_TOKEN
   stty echo 2>/dev/null || true
