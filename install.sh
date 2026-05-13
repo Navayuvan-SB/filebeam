@@ -4,10 +4,25 @@ set -e
 REPO="navayuvan-sb/filebeam"
 PYPI_PACKAGE="filebeam"
 
-echo ""
-echo "  filebeam installer"
-echo "  =================="
-echo ""
+# ── Colors ────────────────────────────────────────────────────────────────────
+
+if [ -t 1 ]; then
+  BOLD="\033[1m"
+  DIM="\033[2m"
+  GREEN="\033[32m"
+  CYAN="\033[36m"
+  YELLOW="\033[33m"
+  RED="\033[31m"
+  RESET="\033[0m"
+else
+  BOLD="" DIM="" GREEN="" CYAN="" YELLOW="" RED="" RESET=""
+fi
+
+info()    { printf "  ${CYAN}›${RESET} %s\n" "$1"; }
+success() { printf "  ${GREEN}✓${RESET} %s\n" "$1"; }
+warn()    { printf "  ${YELLOW}!${RESET} %s\n" "$1"; }
+error()   { printf "  ${RED}✗${RESET} %s\n" "$1"; exit 1; }
+dim()     { printf "  ${DIM}%s${RESET}\n" "$1"; }
 
 # ── CLI ───────────────────────────────────────────────────────────────────────
 
@@ -17,65 +32,71 @@ install_cli() {
   elif command -v pip >/dev/null 2>&1; then
     PIP=pip
   else
-    echo "  [error] pip not found. Install Python 3 first: https://python.org"
-    exit 1
+    error "pip not found — install Python 3 first: https://python.org"
   fi
 
-  echo "  [1/3] Installing filebeam CLI..."
-  $PIP install --quiet --upgrade "$PYPI_PACKAGE"
-  echo "  [1/3] CLI installed."
+  info "Installing filebeam CLI..."
+  PIP_DISABLE_PIP_VERSION_CHECK=1 $PIP install --quiet --upgrade "$PYPI_PACKAGE"
+  success "CLI installed"
 }
 
 # ── Token ─────────────────────────────────────────────────────────────────────
 
 configure_token() {
-  echo ""
-  echo "  [2/3] GitHub token setup"
-  echo ""
-  echo "  filebeam uploads to GitHub Gist. You need a personal access token"
-  echo "  with the 'gist' scope."
-  echo ""
-  echo "  Generate one at:"
-  echo "  https://github.com/settings/tokens/new?scopes=gist&description=filebeam"
-  echo ""
+  printf "\n"
+  info "GitHub token setup"
+  printf "\n"
+  dim "filebeam uploads to GitHub Gist and needs a Personal Access Token"
+  dim "with the 'gist' scope. Generate one at:"
+  printf "\n"
+  printf "  ${CYAN}https://github.com/settings/tokens/new?scopes=gist&description=filebeam${RESET}\n"
+  printf "\n"
 
-  # stty -echo disables terminal echo so the token isn't visible as it's typed
-  printf "  Paste your Github Personal Access Token (or press Enter to skip): "
+  # Read from /dev/tty so it works when the script is piped via curl | sh.
+  # Test that /dev/tty can actually be opened before using it.
+  printf "  ${BOLD}Paste your GitHub Personal Access Token (Enter to skip):${RESET} "
   stty -echo 2>/dev/null || true
-  read -r GITHUB_TOKEN
+  if { true </dev/tty; } 2>/dev/null; then
+    read -r GITHUB_TOKEN </dev/tty
+  else
+    read -r GITHUB_TOKEN
+  fi
   stty echo 2>/dev/null || true
-  echo ""
+  printf "\n"
 
   if [ -z "$GITHUB_TOKEN" ]; then
-    echo "  [2/3] No token entered — skipping. Run 'filebeam config github-gist <token>' later."
+    warn "Skipped — run 'filebeam config github-gist <token>' later"
     return
   fi
 
-  filebeam config github-gist "$GITHUB_TOKEN"
-  echo "  [2/3] Token saved."
+  filebeam config github-gist "$GITHUB_TOKEN" >/dev/null
+  success "Token saved"
 }
 
 # ── Skill ─────────────────────────────────────────────────────────────────────
 
 install_skill() {
   if ! command -v npx >/dev/null 2>&1; then
-    echo "  [3/3] Skipping skill install — npx not found (install Node.js to enable)."
+    warn "Skipping skill install — npx not found (install Node.js to enable)"
     return
   fi
 
-  echo "  [3/3] Installing agent skill..."
-  npx --yes skills add "$REPO" --silent 2>/dev/null || \
-    npx --yes skills add "$REPO"
-  echo "  [3/3] Skill installed."
+  info "Installing agent skill..."
+  npx --yes skills add "$REPO" 2>/dev/null
+  success "Agent skill installed"
 }
 
 # ── Run ───────────────────────────────────────────────────────────────────────
+
+printf "\n"
+printf "  ${BOLD}filebeam${RESET} installer\n"
+printf "  $(printf '%0.s─' $(seq 1 20))\n"
+printf "\n"
 
 install_cli
 configure_token
 install_skill
 
-echo ""
-echo "  All done! Try it:"
-echo "  filebeam upload <file>"
-echo ""
+printf "\n"
+printf "  ${GREEN}${BOLD}All done!${RESET}  Run: ${CYAN}filebeam upload <file>${RESET}\n"
+printf "\n"
