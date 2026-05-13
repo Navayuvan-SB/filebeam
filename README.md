@@ -1,13 +1,15 @@
 <h1 align="center">filebeam</h1>
 
 <p align="center">
-  <b>Beam files up to storage providers from your terminal. Point it at a file, get a URL back.</b>
+  <b>Beam files up to storage providers from your terminal. Point it at a file, get a URL back.</b><br>
+  Built for humans and AI agents alike.
 </p>
 
 <p align="center">
   <a href="https://pypi.org/project/filebeam"><img src="https://img.shields.io/pypi/v/filebeam?label=pypi&color=orange" alt="PyPI version"></a>
   <a href="https://github.com/navayuvan-sb/filebeam/blob/main/LICENSE"><img src="https://img.shields.io/github/license/navayuvan-sb/filebeam?color=brightgreen" alt="License"></a>
   <a href="https://github.com/navayuvan-sb/filebeam/commits/main"><img src="https://img.shields.io/github/last-commit/navayuvan-sb/filebeam?color=brightgreen" alt="Last commit"></a>
+  <img src="https://img.shields.io/badge/agent--ready-Claude%20Code-blueviolet" alt="Agent ready">
 </p>
 
 <p align="center">
@@ -15,6 +17,8 @@
 </p>
 
 Ships with **GitHub Gist** support today. Built with a provider abstraction so adding S3, Cloudflare R2, Pastebin, or anything else is a matter of implementing one class.
+
+> **Agent ready** — filebeam ships a Claude Code skill so AI agents can upload files and get URLs back with no extra setup. Install it with `npx skills add navayuvan-sb/filebeam`.
 
 ---
 
