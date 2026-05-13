@@ -21,11 +21,19 @@ Ships with **GitHub Gist** support today. Built with a provider abstraction so a
 
 ## Installation
 
+**One-liner** — installs the CLI and the agent skill in one shot:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/navayuvan-sb/filebeam/main/install.sh | sh
+```
+
+**CLI only:**
+
 ```bash
 pip install filebeam
 ```
 
-Or from source:
+**Or from source:**
 
 ```bash
 git clone https://github.com/navayuvan-sb/filebeam
