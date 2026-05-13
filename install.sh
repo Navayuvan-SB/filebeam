@@ -56,7 +56,13 @@ fi
 
 # ── Done ──────────────────────────────────────────────────────────────────────
 
-sleep 5
+i=5
+while [ $i -gt 0 ]; do
+  printf "\r  ${DIM}Continuing in ${i}s...${RESET}"
+  sleep 1
+  i=$((i - 1))
+done
+printf "\r%-30s\r" " "
 printf "\n"
 printf "  ${GREEN}${BOLD}All done!${RESET}\n"
 printf "\n"
