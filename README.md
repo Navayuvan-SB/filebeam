@@ -15,7 +15,7 @@ pip install filebeam
 Or from source:
 
 ```bash
-git clone https://github.com/your-username/filebeam
+git clone https://github.com/navayuvan-sb/filebeam
 cd filebeam
 pip install -e .
 ```
@@ -100,6 +100,20 @@ Credentials are stored locally in `~/.filebeam-config`.
 | **0x0.st** | Planned — anonymous, no account needed |
 
 Want to add one? See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+---
+
+## Claude Code skill
+
+filebeam ships a [Claude Code](https://claude.ai/code) skill so any AI agent in your project can upload files without you having to explain the CLI.
+
+**Install the skill:**
+
+```bash
+npx skills add navayuvan-sb/filebeam
+```
+
+Once installed, the agent understands commands like _"upload this file to Gist"_ or _"beam notes.md and give me the URL"_ — and knows how to handle tokens, errors, and provider flags.
 
 ---
 

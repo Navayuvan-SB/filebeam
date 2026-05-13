@@ -7,9 +7,15 @@ Thanks for taking the time to contribute. This document covers how to set up the
 ## Development setup
 
 ```bash
-git clone https://github.com/your-username/filebeam
+git clone https://github.com/navayuvan-sb/filebeam
 cd filebeam
 pip install -e .
+```
+
+Optionally install the Claude Code skill so your agent can use filebeam during development:
+
+```bash
+npx skills add navayuvan-sb/filebeam
 ```
 
 Verify the CLI is wired up:
