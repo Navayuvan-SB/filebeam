@@ -1,7 +1,6 @@
 #!/bin/sh
 set -e
 
-REPO="navayuvan-sb/filebeam"
 PYPI_PACKAGE="filebeam"
 
 # ── Colors ────────────────────────────────────────────────────────────────────
