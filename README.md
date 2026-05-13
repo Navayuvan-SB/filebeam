@@ -1,6 +1,18 @@
 # filebeam
 
-A minimal CLI tool to beam files up to storage providers. Point it at a file, get a URL back.
+<p align="center">
+  <b>Beam files up to storage providers from your terminal. Point it at a file, get a URL back.</b>
+</p>
+
+<p align="center">
+  <a href="https://pypi.org/project/filebeam"><img src="https://img.shields.io/pypi/v/filebeam?label=pypi&color=orange" alt="PyPI version"></a>
+  <a href="https://github.com/navayuvan-sb/filebeam/blob/main/LICENSE"><img src="https://img.shields.io/github/license/navayuvan-sb/filebeam?color=brightgreen" alt="License"></a>
+  <a href="https://github.com/navayuvan-sb/filebeam/commits/main"><img src="https://img.shields.io/github/last-commit/navayuvan-sb/filebeam?color=brightgreen" alt="Last commit"></a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/navayuvan-sb/filebeam/actions/workflows/publish.yml"><img src="https://github.com/navayuvan-sb/filebeam/actions/workflows/publish.yml/badge.svg" alt="CI"></a>
+</p>
 
 Ships with **GitHub Gist** support today. Built with a provider abstraction so adding S3, Cloudflare R2, Pastebin, or anything else is a matter of implementing one class.
 
