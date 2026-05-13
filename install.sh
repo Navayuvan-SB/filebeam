@@ -63,6 +63,9 @@ configure_token() {
   stty echo 2>/dev/null || true
   printf "\n"
 
+  # Strip any trailing whitespace or carriage returns
+  GITHUB_TOKEN=$(printf '%s' "$GITHUB_TOKEN" | tr -d '[:space:]')
+
   if [ -z "$GITHUB_TOKEN" ]; then
     warn "Skipped — run 'filebeam config github-gist <token>' later"
     return
