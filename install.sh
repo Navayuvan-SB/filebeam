@@ -46,9 +46,7 @@ success "CLI installed"
 
 if command -v npx >/dev/null 2>&1; then
   info "Installing agent skill..."
-  # </dev/null prevents the npx TUI from consuming stdin when piped via curl | sh
-  # --yes --global skips all interactive prompts
-  npx skills add navayuvan-sb/filebeam --yes --global < /dev/null
+  npx skills add navayuvan-sb/filebeam --yes --global < /dev/null > /dev/null 2>&1
   success "Agent skill installed"
 else
   warn "Skipping skill install — npx not found (install Node.js to enable)"
@@ -56,13 +54,6 @@ fi
 
 # ── Done ──────────────────────────────────────────────────────────────────────
 
-i=5
-while [ $i -gt 0 ]; do
-  printf "\r  ${DIM}Continuing in ${i}s...${RESET}"
-  sleep 1
-  i=$((i - 1))
-done
-printf "\r%-30s\r" " "
 printf "\n"
 printf "  ${GREEN}${BOLD}All done!${RESET}\n"
 printf "\n"
