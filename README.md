@@ -1,7 +1,7 @@
 <h1 align="center">filebeam</h1>
 
 <p align="center">
-  <b>A file upload CLI built for AI agents — point at a file, get a shareable URL back, no configuration noise.</b>
+  <b>A CLI tool to upload files to the cloud and get a shareable URL — built for AI agents and developers.</b>
 </p>
 
 <p align="center">
@@ -15,7 +15,11 @@
   <a href="https://github.com/navayuvan-sb/filebeam/actions/workflows/publish.yml"><img src="https://github.com/navayuvan-sb/filebeam/actions/workflows/publish.yml/badge.svg" alt="CI"></a>
 </p>
 
-Ships with **GitHub Gist** support today. Built with a provider abstraction so adding S3, Cloudflare R2, Pastebin, or anything else is a matter of implementing one class.
+**filebeam** is a command-line tool to upload any file to cloud storage and instantly get a shareable URL back. Point it at a file, get a link — no browser, no GUI, no friction.
+
+Designed to work seamlessly inside AI agent workflows (Claude Code, Codex, Cursor, Windsurf), but works just as well for developers who prefer the terminal.
+
+Ships with **GitHub Gist** support today. Built with a pluggable provider system so adding AWS S3, Cloudflare R2, Pastebin, or any other cloud storage provider is a matter of implementing one class.
 
 ---
 
@@ -33,7 +37,7 @@ curl -fsSL https://raw.githubusercontent.com/navayuvan-sb/filebeam/main/install.
 pip install filebeam
 ```
 
-**Or from source:**
+**From source:**
 
 ```bash
 git clone https://github.com/navayuvan-sb/filebeam
@@ -54,18 +58,18 @@ filebeam config github-gist <your-token>
 > Create a token at **GitHub → Settings → Developer settings → Personal access tokens**.  
 > Only the `gist` scope is needed.
 
-**2. Upload a file**
+**2. Upload any file to the cloud**
 
 ```bash
 filebeam upload notes.md
 # https://gist.github.com/abc123...
 ```
 
-The URL is printed to stdout — pipe it anywhere:
+The shareable URL is printed to stdout — pipe it anywhere:
 
 ```bash
-filebeam upload script.py | pbcopy        # copy to clipboard (macOS)
-filebeam upload report.txt | xclip        # copy to clipboard (Linux)
+filebeam upload script.py | pbcopy        # copy URL to clipboard (macOS)
+filebeam upload report.txt | xclip        # copy URL to clipboard (Linux)
 ```
 
 ---
@@ -84,7 +88,7 @@ filebeam config show
 
 | Flag | Short | Description |
 |------|-------|-------------|
-| `--provider` | `-p` | Provider to upload to (default: `github-gist`) |
+| `--provider` | `-p` | Cloud storage provider (default: `github-gist`) |
 | `--description` | `-d` | Description attached to the upload |
 | `--private` | | Make the upload private / secret |
 | `--token` | `-t` | Override the stored token for this run only |
@@ -103,7 +107,7 @@ Credentials are stored locally in `~/.filebeam-config`.
 
 ---
 
-## Providers
+## Cloud storage providers
 
 ### Available now
 
@@ -115,18 +119,18 @@ Credentials are stored locally in `~/.filebeam-config`.
 
 | Provider | Status |
 |----------|--------|
-| **AWS S3** | Planned — upload to a bucket, returns object URL |
-| **Cloudflare R2** | Planned — S3-compatible, no egress fees |
+| **AWS S3** | Planned — upload files to a bucket, returns object URL |
+| **Cloudflare R2** | Planned — S3-compatible cloud storage, no egress fees |
 | **Pastebin** | Planned — text-only, wide reach |
-| **0x0.st** | Planned — anonymous, no account needed |
+| **0x0.st** | Planned — anonymous uploads, no account needed |
 
-Want to add one? See [CONTRIBUTING.md](CONTRIBUTING.md).
+Want to add a provider? See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ---
 
 ## Agent skill
 
-filebeam ships an agent skill so your coding agent can upload files and get URLs back without any extra explanation.
+filebeam ships an agent skill so any AI coding agent can upload files to the cloud and get shareable URLs without any extra setup or explanation.
 
 Works with **Claude Code**, **Codex**, **Cursor**, **Windsurf**, and any agent that supports the [skills ecosystem](https://github.com/vercel-labs/skills).
 
@@ -136,7 +140,7 @@ Works with **Claude Code**, **Codex**, **Cursor**, **Windsurf**, and any agent t
 npx skills add navayuvan-sb/filebeam
 ```
 
-Once installed, the agent understands requests like _"upload this file to Gist"_ or _"beam notes.md and give me the URL"_ — and handles tokens, errors, and provider flags on its own.
+Once installed, the agent understands requests like _"upload this file to Gist"_, _"beam notes.md and give me the URL"_, or _"share this script via filebeam"_ — and handles tokens, errors, and provider selection on its own.
 
 ---
 
