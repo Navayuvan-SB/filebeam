@@ -25,7 +25,7 @@ Ships with **GitHub Gist** support today. Built with a pluggable provider system
 
 ## Installation
 
-**One-liner** — installs the CLI and the agent skill in one shot:
+**One-liner** *(recommended)* — installs the CLI and the agent skill in one shot:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/navayuvan-sb/filebeam/main/install.sh | sh
