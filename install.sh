@@ -48,7 +48,9 @@ install_skill() {
   fi
 
   info "Installing agent skill..."
-  npx --yes skills add navayuvan-sb/filebeam
+  # --yes passed to skills CLI (not npx) to skip interactive agent selector
+  # </dev/tty ensures the TUI doesn't consume stdin when piped via curl | sh
+  npx skills add navayuvan-sb/filebeam --yes </dev/tty
   success "Agent skill installed"
 }
 
