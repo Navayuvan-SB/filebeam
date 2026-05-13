@@ -82,7 +82,7 @@ install_skill() {
   fi
 
   info "Installing agent skill..."
-  npx --yes skills add "$REPO" 2>/dev/null
+  npx --yes skills add navayuvan-sb/filebeam
   success "Agent skill installed"
 }
 
